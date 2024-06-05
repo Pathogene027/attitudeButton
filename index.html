@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="riddles.js"></script>
+    <script src="eye.js"></script>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="top">
+        <h1>Riddle Me This</h1>
+        <p>Can you crack my riddle Smartie</p>
+      </div>
+      <div class="bottom">
+        <h2 class="riddle"></h2>
+        <form action="" class="answerForm">
+          <input type="text" placeholder="Enter your answer" />
+          <button type="button">
+            <div class="face">
+              <div class="eyes">
+                <span class="eye-opened right-eye"></span>
+                <span class="eye-opened left-eye"></span>
+              </div>
+            </div>
+            <div class="mouth"></div>
+          </button>
+          <p></p>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    let riddle = "";
+    let result = false;
+    const randomQuestion = () => {
+      let random = Math.floor(Math.random() * (riddles.length - 1));
+      riddle = riddles[random];
+    };
+    randomQuestion();
+    const riddleTag = document.querySelector(".riddle");
+    riddleTag.innerText = riddle.question;
+    const button = document.querySelector("button");
+    const input = document.querySelector("input");
+    let state = false;
+    const compare = (e) => {
+      const inputVal = e.target.value;
+      const newRiddle = riddle.answer.toLowerCase();
+      const inputEffect = () => {
+        if (newRiddle.includes(inputVal.toLowerCase()) && inputVal) {
+          if (newRiddle === inputVal.toLowerCase()) {
+            button.className = "correct";
+          } else {
+            button.className = "valid";
+          }
+        } else {
+          if (inputVal) {
+            button.className = "invalid";
+          } else {
+            button.className = "";
+          }
+        }
+        if (button.className === "correct") {
+          button.type = "submit";
+          state = true;
+        } else {
+          button.type = "button";
+          state = false;
+        }
+      };
+      inputEffect();
+    };
+    const buttonEnterEffect = (e) => {
+      if (state) {
+        e.target.innerHTML = "<p>Click Me</p>";
+      }
+    };
+    const buttonLeaveEffect = (e) => {
+      if (state) {
+        if (state) {
+          e.target.innerHTML = `
+          <div class="face">
+            <div class="eyes">
+              <span class="eye-opened right-eye"></span>
+              <span class="eye-opened left-eye"></span>
+            </div>
+          </div>
+          <div class="mouth"></div>
+        `;
+        }
+      }
+    };
+    button.addEventListener("mouseleave", buttonLeaveEffect);
+    button.addEventListener("mouseenter", buttonEnterEffect);
+    input.addEventListener("input", compare);
+    eyeMove();
+  </script>
+</html>

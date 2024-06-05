@@ -1,0 +1,242 @@
+:root {
+  --main-color: white;
+  --container-shadow: 0 20px 20px -10px grey;
+  --item-shadow: 0 10px 20px -10px grey;
+  --center: center;
+  --transparent: transparent;
+}
+
+/* General reset and font style */
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Centering card container and adding shadow and rounded corners */
+.card-container {
+  width: 50%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: var(--container-shadow);
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* Styling for the top section of the card */
+.top {
+  text-align: var(--center);
+  line-height: 3em;
+}
+
+/* Form layout */
+.answerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Input and button styling */
+button,
+input {
+  height: 40px;
+  outline: none;
+  border: none;
+  position: relative;
+}
+
+/* Styling for the mouth animation */
+.mouth {
+  width: 50%;
+  height: 50px;
+  transition: all 0.5s;
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--main-color);
+}
+
+/* Adjustments for different button states */
+.valid .mouth,
+.invalid .mouth,
+.correct .mouth {
+  margin-top: 4px;
+  margin-bottom: 5px;
+  border-radius: 50%;
+}
+
+.valid {
+  background-color: green;
+}
+
+.valid .mouth {
+  width: 10px;
+  background-color: var(--main-color);
+}
+
+.invalid {
+  background-color: red; /* Fix the incorrect use of quotes */
+}
+
+.invalid .mouth {
+  border-top: 2px solid var(--main-color);
+  border-bottom: var(--transparent);
+}
+
+.correct {
+  background-color: green;
+}
+
+/* Animation for the correct answer state */
+.correct:hover {
+  animation: colorSwitch 1s infinite ease-in;
+}
+
+.correct p {
+  width: 100%;
+  height: 100%;
+  color: var(--main-color);
+  display: flex;
+  align-items: var(--center);
+  justify-content: var(--center);
+  animation: swing 1s infinite normal;
+  pointer-events: none;
+}
+
+/* Input field styling */
+input {
+  width: 50%;
+  height: 40px;
+  background-color: var(--transparent);
+  border-bottom: solid var(--main-color) 2px;
+  padding-left: 20px;
+  margin-top: 50px;
+  color: var(--main-color);
+  font-size: 18px;
+}
+input::placeholder {
+  color: var(--main-color);
+  font-size: 18px;
+}
+
+/* Button styling */
+button {
+  box-shadow: var(--item-shadow);
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-items: var(--center);
+  align-items: var(--center);
+  border: var(--transparent);
+  background-color: red;
+  border-radius: 5px;
+}
+
+/* Eye container styling */
+.eyes {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: var(--center);
+  margin-top: 5px;
+}
+
+/* Opened eye styling */
+.eye-opened {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+}
+
+/* Closed eye styling */
+.eye-closed {
+  border-radius: 0%;
+  width: 10px;
+  height: 5px;
+}
+
+/* Bottom section styling */
+.bottom {
+  background-color: rgb(255, 165, 0);
+  border-radius: 10px;
+  padding: 40px;
+}
+
+/* Face container styling */
+.face,
+.clicked {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: var(--center);
+  align-items: center;
+}
+
+/* General paragraph styling */
+p {
+  font-weight: 400;
+  position: relative;
+  font-size: 20px;
+}
+
+/* General heading styling */
+h2 {
+  color: var(--main-color);
+}
+
+/* Keyframe animation for color switching */
+@keyframes colorSwitch {
+  50% {
+    background-color: rgb(64, 192, 64);
+  }
+  100% {
+    background-color: var(
+      --transparent
+    ); /* Fix to set background back to transparent */
+  }
+}
+
+/* Keyframe animation for swinging effect */
+@keyframes swing {
+  5% {
+    transform: translateX(4px);
+  }
+  10% {
+    transform: translateX(-4px);
+  }
+  15% {
+    transform: translateX(3px);
+  }
+  20% {
+    transform: translateX(-3px);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  30% {
+    transform: translateY(4px);
+  }
+  35% {
+    transform: translateY(-4px);
+  }
+  40% {
+    transform: translateY(3px);
+  }
+  45% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}
